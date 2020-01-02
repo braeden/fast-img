@@ -1,0 +1,25 @@
+{
+  "name": "fast-img",
+  "version": "1.0.0",
+  "description": "Scaling images for low-bandwidth delivery",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/braeden/fast-img.git"
+  },
+  "author": "Braeden Smith",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/braeden/fast-img/issues"
+  },
+  "homepage": "https://github.com/braeden/fast-img#readme",
+  "dependencies": {
+    "express": "^4.17.1",
+    "lru-cache": "^5.1.1",
+    "node-fetch": "^2.6.0",
+    "sharp": "^0.23.4"
+  }
+}
