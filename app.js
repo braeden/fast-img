@@ -13,20 +13,20 @@ app.get('/image', async (req, res) => {
         if (!req.query.url) throw "Error processing image query"
         const response = await fetch(req.query.url)
         if (!response.ok || !response.headers.get('content-type').includes("image")) {
-            throw "Content type error"
+            throw "Content-type error"
         }
         const image = await response.body
         res.type('jpeg')
         const pipeline = sharp()
         const sharpObject = image.pipe(pipeline)
-        const newWidth = (await sharpObject.metadata()).width / (parseInt(req.query.scale) || 2)
+        const newWidth = ~~((await sharpObject.metadata()).width / (parseInt(req.query.scale) || 2))
         const out = image.pipe(pipeline.resize(newWidth).jpeg({
             quality: parseInt(req.query.qual) || 80
         }))
         out.pipe(res)
     } catch (e) {
         console.log(e)
-        res.send("Error")
+        res.status(400).send("Error")
     }
 })
 

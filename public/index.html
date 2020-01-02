@@ -1,5 +1,19 @@
-<form action="/image/">
-    Image: <input type="url" name="url">
-    <input type="submit" value="Submit">
-</form>
-  
+<html>
+
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+</head>
+
+<body>
+    <form action="/image/">
+        Image: <input type="url" name="url">
+        <br>
+        Scale (1/x): <input type="number" name="scale" min="1" max="10" value="1">
+        <br>
+        Quality (1-100): <input type="number" name="qual" min="1" max="100" value="80">
+        <br>
+        <input type="submit" value="Submit">
+    </form>
+</body>
+
+</html>
