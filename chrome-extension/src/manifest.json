@@ -1,0 +1,20 @@
+{
+    "name": "fast-img",
+    "version": "0.0.1",
+    "description": "Open image links or images with fast-img",
+    "background": {
+        "scripts": [
+            "background.js"
+        ]
+    },
+    "permissions": [
+        "contextMenus",
+        "tabs"
+    ],
+    "icons": {
+        "16": "fast-img-16.png",
+        "48": "fast-img-48.png",
+        "128": "fast-img-128.png"
+    },
+    "manifest_version": 2
+}
