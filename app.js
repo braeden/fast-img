@@ -1,32 +1,45 @@
 const express = require('express')
 const sharp = require('sharp')
 const fetch = require('node-fetch');
-const path = require('path')
+const Cache = require('streaming-cache');
+const cache = new Cache({
+    max: 100 * 10 ** 6, // In bytes (100Mb)
+});
 const app = express()
 const port = process.env.PORT || 3000
 app.use(express.static('public'))
 
 app.get('/image', async (req, res) => {
-    console.log(req.query.url)
+    const scale = parseInt(req.query.scale) || 2
+    const quality = parseInt(req.query.qual) || 80
+    const lookupKey = `${req.query.url || ''}|${scale}|${quality}`
+    console.log(lookupKey)
 
-    try {
-        if (!req.query.url) throw "Error processing image query"
-        const response = await fetch(req.query.url)
-        if (!response.ok || !response.headers.get('content-type').includes("image")) {
-            throw "Content-type error"
-        }
-        const image = await response.body
+    if (cache.exists(lookupKey)) {
+        console.log('Cache hit')
         res.type('jpeg')
-        const pipeline = sharp()
-        const sharpObject = image.pipe(pipeline)
-        const newWidth = ~~((await sharpObject.metadata()).width / (parseInt(req.query.scale) || 2))
-        const out = image.pipe(pipeline.resize(newWidth).jpeg({
-            quality: parseInt(req.query.qual) || 80
-        }))
-        out.pipe(res)
-    } catch (e) {
-        console.log(e)
-        res.status(400).send("Error")
+        cache.get(lookupKey).pipe(res)
+    } else {
+        try {
+            if (!req.query.url) throw "Error processing image query"
+            const response = await fetch(req.query.url)
+            if (!response.ok || !response.headers.get('content-type').includes("image")) {
+                throw "Content-type error"
+            }
+            const image = await response.body
+            res.type('jpeg')
+            const pipeline = sharp()
+            const sharpObject = image.pipe(pipeline)
+            const newWidth = ~~((await sharpObject.metadata()).width / scale)
+            const out = image.pipe(pipeline.resize(newWidth).jpeg({
+                quality: quality
+            }))
+            out.pipe(cache.set(lookupKey)).pipe(res)
+            console.log('Re-served image')
+        } catch (e) {
+            console.log(e)
+            res.status(400).send("Error")
+        }
     }
 })
 
