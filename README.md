@@ -1,12 +1,26 @@
 # About
 
-### fast-img is for use with low bandwidth devices trying to access images at greater speed in return for a sacrifice of quality + one additonal GET request.
+### fast-img is for use with low bandwidth devices trying to access images at greater speed in exchange for minor quality sacrifices & one additonal GET request.
 
-We lean on a datacenter's fast connection to download, scale and compress an image by URL and then serve back the smaller version in the same request. 
+We lean on a datacenter's fast connection to download, scale and compress an image by URL and then serve back the smaller version in the same request. We also use LRU caching for repetative requests. 
 
-This can lead to faster access times then trying to access a large original file.
+This can lead to substantially faster access times for images of all sizes!
 
-It takes GET query arguments at `/image/?url=` to a image URL plus optional:
+# Screenshots
+
+## 20MB Image w/ ~200Mbps Wifi (9.25s)
+![original](screenshots/original.png)
+
+## 20MB Image downscaled w/ fast-img (5.92s)
+`scale=2, qual=80`
+![scaled](screenshots/scaled.png)
+
+## 20MB Image downscaled w/ fast-img cache hit (0.39s)
+![scaled and cached](screenshots/scaled+cached.png)
+
+# About cont.
+
+The domain takes GET query arguments at `/image/?url=` to a image URL plus optional:
 - `qual` [1-100, Default:80]
 - `scale` [1-10, Default:2]
 
@@ -18,7 +32,7 @@ On images or links ending with `jpeg, png, png` we add an addtional ContextMenu 
 
 # Setup
 
-Main back-end
+Server back-end
 ```
 npm install
 npm start
