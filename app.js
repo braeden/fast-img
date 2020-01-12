@@ -9,11 +9,17 @@ const app = express()
 const port = process.env.PORT || 3000
 app.use(express.static('public'))
 
+function logExceptOnTest(string) {
+    if (process.env.NODE_ENV !== 'test') {
+        console.log(string);
+    }
+}
+
 app.get('/image', async (req, res) => {
     const scale = parseInt(req.query.scale) || 2
     const quality = parseInt(req.query.qual) || 80
     const lookupKey = `${req.query.url || ''}|${scale}|${quality}`
-    console.log(lookupKey)
+    logExceptOnTest(lookupKey)
 
     if (cache.exists(lookupKey)) {
         console.log('Cache hit')
@@ -35,13 +41,20 @@ app.get('/image', async (req, res) => {
                 quality: quality
             }))
             out.pipe(cache.set(lookupKey)).pipe(res)
-            console.log('Re-served image')
+            console.log('Served image')
         } catch (e) {
-            console.log(e)
+            logExceptOnTest(e)
             res.status(400).send("Error")
         }
     }
 })
 
+app.get('/clear-cache', (req, res) => {
+    if (process.env.NODE_ENV === 'test' || process.env.NODE_ENV === 'dev') {
+        cache.reset()
+        console.log('Cleared cache')
+    }
+    res.end(200)
+})
 
 app.listen(port, () => console.log(`Started at port ${port}`))
