@@ -45,7 +45,4 @@ Chrome Extension
 ```
 Chrome Extensions > Developer Mode [On] >
 Load Unpacked Extension > Find the chrome-extension/src folder
-
-To publish: 
-./build.sh OR zip the src directory
 ```

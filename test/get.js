@@ -19,9 +19,7 @@ it('Default image response', async () => {
     const searchParams = createSearchParams({
         qual: 80,
         scale: 2
-    })
-    //console.log('http://localhost:3000/image/?' + searchParams)
-    
+    })    
     const response = await fetch('http://localhost:3000/image/?' + searchParams)
     expect(response.status).to.equal(200)
     expect(response.headers.get('Content-Type')).to.equal('image/jpeg')
@@ -51,4 +49,14 @@ it('Invalid parameters response', async () => {
     const response = await fetch('http://localhost:3000/image/?' + searchParams)
     expect(response.status).to.equal(400)
 
+});
+
+
+it('Non-image URL', async () => {
+    const searchParams = createSearchParams({
+        qual: 80,
+        scale: 2
+    }, 'https://google.com')    
+    const response = await fetch('http://localhost:3000/image/?' + searchParams)
+    expect(response.status).to.equal(400)
 });
