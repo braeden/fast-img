@@ -1,8 +1,8 @@
 process.env.NODE_ENV = 'test';
-
 const expect = require('chai').expect;
 const fetch = require('node-fetch')
 require('../app')
+
 function createSearchParams(obj, url) {
     return new URLSearchParams({
         ...obj,
@@ -50,7 +50,6 @@ it('Invalid parameters response', async () => {
     expect(response.status).to.equal(400)
 
 });
-
 
 it('Non-image URL', async () => {
     const searchParams = createSearchParams({

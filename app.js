@@ -44,7 +44,7 @@ app.get('/image', async (req, res) => {
             console.log('Served image')
         } catch (e) {
             logExceptOnTest(e)
-            res.status(400).send("Error")
+            res.status(400).sendFile('public/error.html', {root: __dirname })
         }
     }
 })
