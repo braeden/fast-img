@@ -1,8 +1,8 @@
 # About
 
-### fast-img is for use with low bandwidth devices trying to access images at greater speed in exchange for minor quality sacrifices & one additonal GET request.
+### fast-img is for use with low bandwidth devices trying to access images at greater speed in exchange for minor quality sacrifices & one additional GET request.
 
-We lean on a datacenter's fast connection to download, scale and compress an image by URL and then serve back the smaller version in the same request. We also use LRU caching for repetative requests. 
+We lean on a data center's fast connection to download, scale and compress an image by URL and then serve back the smaller version in the same request. We also use LRU caching for repetitive requests. 
 
 This can lead to substantially faster access times for images of all sizes!
 
@@ -35,7 +35,8 @@ On images or links ending with `jpeg, png, png` we add an addtional ContextMenu 
 Server back-end
 ```
 npm install
-npm start
+npm test
+npm run start-dev
 
 OR npm run heroku (for heroku testing)
 ```
