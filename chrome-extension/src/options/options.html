@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <link rel="stylesheet" href="https://unpkg.com/purecss@1.0.1/build/pure-min.css"
+        integrity="sha384-oAOxQR6DkCoMliIh8yFnu25d7Eq/PHS21PClpwjOTeU2jRSq11vu66rf90/cZr47" crossorigin="anonymous">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>fast-img options</title>
+    <style>
+        body {
+            margin: 1em;
+        }
+    </style>
+</head>
+
+<body>
+    <form class="pure-form pure-form-stacked">
+        <fieldset>
+            <div class="pure-control-group">
+                <label for="scale">Default scale down factor [1-10]</label>
+                <input id="scale" type="number" name="scale" min="1" max="10" value="2">
+            </div>
+            <div class="pure-control-group">
+                <label for="qual">Default quality [1-100]</label>
+                <input id="qual" type="number" name="qual" min="1" max="100" value="80"> </div>
+
+            <div class="pure-controls">
+                <button id="save" type="submit" class="pure-button pure-button-primary">Save</button>
+            </div>
+        </fieldset>
+    </form>
+
+    <script src="options.js"></script>
+</body>
+
+</html>

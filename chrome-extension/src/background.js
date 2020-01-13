@@ -1,11 +1,19 @@
+const websiteUrl = 'http://fast-img.herokuapp.com/image/?'
+
 chrome.contextMenus.onClicked.addListener((info, tab) => {
-    const searchParams = new URLSearchParams({
-        url: info.srcUrl || info.linkUrl,
+    chrome.storage.sync.get({
+        qual: 80,
+        scale: 2
+    }, items => {
+        const searchParams = new URLSearchParams({
+            url: info.srcUrl || info.linkUrl,
+            ...items
+        });
+        chrome.tabs.create({
+            url: websiteUrl + searchParams
+        })
     });
-    const websiteUrl = 'http://fast-img.herokuapp.com/image/?'
-    chrome.tabs.create({
-        url: websiteUrl + searchParams
-    })
+
 });
 
 chrome.contextMenus.create({
@@ -14,6 +22,8 @@ chrome.contextMenus.create({
     targetUrlPatterns: [
         '*://*/*.jpeg',
         '*://*/*.jpg',
-        '*://*/*.png'
+        '*://*/*.png',
+        '*://*/*.svg',
+        '*://*/*.gif'
     ]
 });

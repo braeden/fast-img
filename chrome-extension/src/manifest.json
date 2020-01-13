@@ -1,6 +1,6 @@
 {
     "name": "fast-img",
-    "version": "0.0.1",
+    "version": "1.0.3",
     "description": "Open image links or images with fast-img",
     "background": {
         "scripts": [
@@ -9,12 +9,17 @@
     },
     "permissions": [
         "contextMenus",
-        "tabs"
+        "tabs",
+        "storage"
     ],
     "icons": {
-        "16": "fast-img-16.png",
-        "48": "fast-img-48.png",
-        "128": "fast-img-128.png"
+        "16": "images/fast-img-16.png",
+        "48": "images/fast-img-48.png",
+        "128": "images/fast-img-128.png"
+    },
+    "options_ui": {
+        "page": "options/options.html",
+        "open_in_tab": false
     },
     "manifest_version": 2
 }
