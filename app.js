@@ -44,10 +44,7 @@ app.get('/image', async (req, res) => {
             console.log('Served image')
         } catch (e) {
             logExceptOnTest(e)
-            res.writeHead(302, {
-                'Location': '/error.html'
-            })
-            res.end()
+            res.redirect('/error.html')
         }
     }
 })

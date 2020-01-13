@@ -50,8 +50,8 @@ describe('Invalid requests', function () {
             scale: 2
         })
         const response = await fetch('http://localhost:3000/image/?' + searchParams)
-        expect(response.status).to.equal(400)
-
+        expect(response.redirected).true
+        expect(response.url).to.include('error.html')
     });
 
     it('Non-image URL', async () => {
@@ -60,6 +60,7 @@ describe('Invalid requests', function () {
             scale: 2
         }, 'https://google.com')
         const response = await fetch('http://localhost:3000/image/?' + searchParams)
-        expect(response.status).to.equal(400)
+        expect(response.redirected).true
+        expect(response.url).to.include('error.html')
     })
 })
