@@ -1,5 +1,5 @@
 
-# About <img align="right" width="100" height="100" src="chrome-extension/src/fast-img-128.png">
+# About <img align="right" width="100" height="100" src="chrome-extension/src/images/fast-img-128.png">
 
 
 ### Fast-img leans on a data center's fast connection to download, scale and compress an image by URL and then serve back the smaller version in the same request. We also use aggressive caching for repetitive requests. 
