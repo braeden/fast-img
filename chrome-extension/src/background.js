@@ -27,3 +27,32 @@ chrome.contextMenus.create({
         '*://*/*.gif'
     ]
 });
+
+chrome.storage.sync.get({
+    allRequests: false
+}, items => {
+    console.log("got here", items)
+    if (items.allRequests) {
+        chrome.webRequest.onBeforeRequest.addListener(
+            function (details) {
+                let searchParams
+                console.log(details.url);
+                searchParams = new URLSearchParams({
+                    url: details.url,
+                    qual: 1,
+                    scale: 2
+                });
+                return ({
+                    redirectUrl: websiteUrl + searchParams
+                })
+            }, {
+                urls: [
+                    '*://*/*.jpeg',
+                    '*://*/*.jpg',
+                    '*://*/*.png',
+                ]
+            },
+            ['blocking', 'requestBody']
+        );
+    }
+})

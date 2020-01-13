@@ -10,7 +10,10 @@
     "permissions": [
         "contextMenus",
         "tabs",
-        "storage"
+        "storage",
+        "webRequest",
+        "webRequestBlocking",
+        "<all_urls>"
     ],
     "icons": {
         "16": "images/fast-img-16.png",
