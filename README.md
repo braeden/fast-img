@@ -36,9 +36,9 @@ Be aware that we're using a free dyno on Heroku, so the server goes to sleep aft
 
 # Chrome Extension
 
-On images or links ending with `jpeg, jpg, png, svg, gif` we add an addtional ContextMenu (right click option), which opens that image with fast-img in a new tab.
+https://chrome.google.com/webstore/detail/fast-img/incdigmgccieklnojeifgnmfkelgjgne
 
-You can find a published but unlisted version here shortly!
+On images or links ending with `jpeg, jpg, png, svg, gif` we add an addtional ContextMenu (right click option), which opens that image with fast-img in a new tab.
 
 ![extension example](screenshots/extension.png)
 
